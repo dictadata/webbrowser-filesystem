@@ -1,26 +1,26 @@
 /**
- * test/redshift/retrieve
+ * test/scraper/retrieve
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const RedshiftJunction = require("../../lib/redshift");
+const ScraperJunction = require("../../lib/scraper");
 
 const retrieve = require('../lib/_retrieve');
 const logger = require('../logger');
 
-logger.info("=== Test: redshift");
+logger.info("=== Test: scraper");
 
-console.log("--- adding RedshiftJunction to storage cortex");
-storage.use("redshift", RedshiftJunction);
+console.log("--- adding ScraperJunction to storage cortex");
+storage.use("scraper", ScraperJunction);
 
 
 async function tests() {
 
-  logger.info("=== redshift retrieve");
+  logger.info("=== scraper retrieve");
   await retrieve({
     source: {
-      smt: "redshift|DSN=drewlab|foo_schema|*",
+      smt: "scraper|connection string|foo_schema|*",
       pattern: {
         match: {
           "Foo": 'twenty'
@@ -32,10 +32,10 @@ async function tests() {
     }
   });
 
-  logger.info("=== redshift retrieve with pattern");
+  logger.info("=== scraper retrieve with pattern");
   await retrieve({
     source: {
-      smt: "redshift|DSN=drewlab|foo_transfer|*",
+      smt: "scraper|connection string|foo_transfer|*",
       pattern: {
         match: {
           "Foo": "first",

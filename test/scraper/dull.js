@@ -1,26 +1,26 @@
 /**
- * test/redshift/dull
+ * test/scraper/dull
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const RedshiftJunction = require("../../lib/redshift");
+const ScraperJunction = require("../../lib/scraper");
 
 const dull = require('../lib/_dull');
 const logger = require('../logger');
 
-logger.info("=== Test: redshift");
+logger.info("=== Test: scraper");
 
-console.log("--- adding RedshiftJunction to storage cortex");
-storage.use("redshift", RedshiftJunction);
+console.log("--- adding ScraperJunction to storage cortex");
+storage.use("scraper", ScraperJunction);
 
 
 async function tests() {
 
-  logger.info("=== redshift dull");
+  logger.info("=== scraper dull");
   await dull({
     source: {
-      smt: "redshift|DSN=drewlab|foo_schema|*",
+      smt: "scraper|connection string|foo_schema|*",
       pattern: {
         match: {
           Foo: 'twenty'

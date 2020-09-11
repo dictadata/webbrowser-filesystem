@@ -1,26 +1,26 @@
 /**
- * test/redshift/store
+ * test/scraper/store
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const RedshiftJunction = require("../../lib/redshift");
+const ScraperJunction = require("../../lib/scraper");
 
 const store = require('../lib/_store');
 const logger = require('../logger');
 
-logger.info("=== Test: redshift");
+logger.info("=== Test: scraper");
 
-console.log("--- adding RedshiftJunction to storage cortex");
-storage.use("redshift", RedshiftJunction);
+console.log("--- adding ScraperJunction to storage cortex");
+storage.use("scraper", ScraperJunction);
 
 
 async function tests() {
 
-  logger.info("=== redshift store 20");
+  logger.info("=== scraper store 20");
   await store({
     source: {
-      smt: "redshift|DSN=drewlab|foo_schema|=Foo",
+      smt: "scraper|connection string|foo_schema|=Foo",
       options: {
         logger: logger
       }
@@ -32,10 +32,10 @@ async function tests() {
     }
   });
 
-  logger.info("=== redshift store 30");
+  logger.info("=== scraper store 30");
   await store({
     source: {
-      smt: "redshift|DSN=drewlab|foo_schema|=Foo",
+      smt: "scraper|connection string|foo_schema|=Foo",
       options: {
         logger: logger
       }
@@ -48,10 +48,10 @@ async function tests() {
     }
   });
 
-  logger.info("=== redshift store 10");
+  logger.info("=== scraper store 10");
   await store({
     source: {
-      smt: "redshift|DSN=drewlab|foo_schema|=Foo",
+      smt: "scraper|connection string|foo_schema|=Foo",
       options: {
         logger: logger
       }

@@ -1,23 +1,23 @@
 /**
- * test/redshift/transfer
+ * test/scraper/transfer
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const RedshiftJunction = require("../../lib/redshift");
+const ScraperJunction = require("../../lib/scraper");
 
 const transfer = require('../lib/_transfer');
 const logger = require('../logger');
 
-logger.info("=== Test: redshift");
+logger.info("=== Test: scraper");
 
-console.log("--- adding RedshiftJunction to storage cortex");
-storage.use("redshift", RedshiftJunction);
+console.log("--- adding ScraperJunction to storage cortex");
+storage.use("scraper", ScraperJunction);
 
 
 async function tests() {
 
-  logger.info("=== redshift writer");
+  logger.info("=== scraper writer");
   await transfer({
     source: {
       smt: "csv|./test/data/|foofile.csv|*",
@@ -26,23 +26,23 @@ async function tests() {
       }
     },
     destination: {
-      smt: "redshift|DSN=drewlab|foo_transfer|*",
+      smt: "scraper|connection string|foo_transfer|*",
       options: {
         logger: logger
       }
     }
   });
 
-  logger.info("=== redshift reader");
+  logger.info("=== scraper reader");
   await transfer({
     source: {
-      smt: "redshift|DSN=drewlab|foo_transfer|*",
+      smt: "scraper|connection string|foo_transfer|*",
       options: {
         logger: logger
       }
     },
     destination: {
-      smt: "csv|./test/output/|redshift_output.csv|*",
+      smt: "csv|./test/output/|scraper_output.csv|*",
       options: {
         logger: logger
       }
