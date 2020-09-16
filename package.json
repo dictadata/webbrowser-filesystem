@@ -22,6 +22,7 @@
   "dependencies": {
     "@dictadata/storage-junctions": "^1.2.0",
     "axios": "^0.20.0",
+    "nightmare": "^3.0.2",
     "node-html-parser": "^1.2.20"
   }
 }

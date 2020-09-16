@@ -47,6 +47,23 @@ async function tests() {
     terminal: "./test/output/scraper_list_2.json"
   });
 
+  logger.info("=== list scraper directory (recursive)");
+  await list({
+    origin: {
+      smt: {
+        model: "json",
+        locus: "http://ec2-3-208-205-6.compute-1.amazonaws.com/shapefiles/",
+        schema: "*.shp",
+        key: "*"
+      },
+      options: {
+        schema: "*.shp",
+        recursive: true
+      }
+    },
+    terminal: "./test/output/scraper_list_3.json"
+  });
+
 }
 
 tests();
