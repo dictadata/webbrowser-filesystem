@@ -1,12 +1,12 @@
 {
-  "name": "@dictadata/scraper-junction",
+  "name": "@dictadata/scraper-filesystem",
   "version": "1.0.0",
   "description": "Storage junction for Amazon scraper database access.",
   "main": "index.js",
   "scripts": {
     "test": "node test/main.js"
   },
-  "repository": "github:dictadata/scraper-junction",
+  "repository": "github:dictadata/scraper-filesystem",
   "keywords": [
     "storage",
     "junction",
@@ -16,10 +16,12 @@
   "author": "Drew O. Letcher",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dictadata/scraper-junction/issues"
+    "url": "https://github.com/dictadata/scraper-filesystem/issues"
   },
-  "homepage": "https://github.com/dictadata/scraper-junction#readme",
+  "homepage": "https://github.com/dictadata/scraper-filesystem#readme",
   "dependencies": {
-    "@dictadata/storage-junctions": "^1.1.8"
+    "@dictadata/storage-junctions": "^1.2.0",
+    "axios": "^0.20.0",
+    "node-html-parser": "^1.2.20"
   }
 }

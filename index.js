@@ -1,7 +1,7 @@
 /**
- * @dictadata/scraper-junction
+ * @dictadata/scraper-filesystem
  */
 "use strict";
 
-var ScraperJunction = require("./lib/scraper");
-module.exports = ScraperJunction;
+var ScraperFileSystem = require("./lib/filesystems/scraper-filesystem");
+module.exports = ScraperFileSystem;

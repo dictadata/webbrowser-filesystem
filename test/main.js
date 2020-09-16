@@ -1,5 +1,5 @@
 /**
- * test/scraper-junction
+ * test/scraper-filesystem
  */
 "use strict";
 

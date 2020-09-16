@@ -1,0 +1,29 @@
+{
+  "model": "*",
+  "locus": "*",
+  "schema": "foo_schema",
+  "key": "*",
+  "fields": {
+    "Foo": {
+      "type": "keyword",
+      "size": 64,
+      "isKey": true
+    },
+    "Bar": {
+      "type": "keyword",
+      "size": 64
+    },
+    "Baz": {
+      "type": "integer"
+    },
+    "Fobe": {
+      "type": "number"
+    },
+    "Dt Test": {
+      "type": "date"
+    },
+    "enabled": {
+      "type": "boolean"
+    }
+  }
+}

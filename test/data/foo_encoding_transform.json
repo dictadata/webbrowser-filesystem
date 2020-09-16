@@ -1,0 +1,13 @@
+{
+  "model": "*",
+  "locus": "*",
+  "schema": "foo_transform",
+  "key": "*",
+  "description": "short encoding for transforms",
+  "fields": {
+    "Dt Test": "date",
+    "Foo": "keyword",
+    "Bar": "keyword",
+    "Baz": "integer"
+  }
+}
