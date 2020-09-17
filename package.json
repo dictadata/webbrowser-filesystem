@@ -23,6 +23,7 @@
     "@dictadata/storage-junctions": "^1.2.0",
     "axios": "^0.20.0",
     "nightmare": "^3.0.2",
+    "nightmare-download-manager": "^0.2.5",
     "node-html-parser": "^1.2.20"
   }
 }
