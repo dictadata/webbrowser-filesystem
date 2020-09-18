@@ -12,7 +12,8 @@
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "debug"
-      }
+      },
+      "runtimeArgs": ["--inspect-brk"]
     },
     {
       "type": "node",
@@ -22,7 +23,8 @@
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"
-      }
+      },
+      "runtimeArgs": ["--inspect-brk"]
     }
   ]
 }

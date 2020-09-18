@@ -4,6 +4,7 @@
   "description": "Storage junction for Amazon scraper database access.",
   "main": "index.js",
   "scripts": {
+    "debug": "set NODE_ENV=development&& node --inspect-brk test/scraper/list.js",
     "test": "node test/main.js"
   },
   "repository": "github:dictadata/scraper-filesystem",
