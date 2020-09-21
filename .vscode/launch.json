@@ -18,6 +18,16 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "scraper download",
+      "program": "${workspaceFolder}/test/scraper/download.js",
+      "outputCapture": "std",
+      "env": {
+        "LOG_LEVEL": "verbose"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "scraper transfer",
       "program": "${workspaceFolder}/test/scraper/transfer.js",
       "outputCapture": "std",
