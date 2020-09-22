@@ -31,6 +31,7 @@ async function tests() {
 
   logger.info("=== download scraper directory (forEach)");
   let list = await download.list();
+  
   for (let entry of list) {
     console.log(JSON.stringify(entry,null,2));
     await download.getFile(entry)
