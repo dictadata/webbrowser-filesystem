@@ -18,7 +18,7 @@ async function tests() {
 
   let download = new Download({
     origin: {
-      smt: "json|http://localhost/test/data/|*.gz|*",
+      smt: "csv|http://localhost/test/data/|*.csv|*",
       options: {
         recursive: false,
         forEach: (name) => {
