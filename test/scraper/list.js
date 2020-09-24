@@ -14,7 +14,8 @@ logger.info("=== tests: scraper list");
 logger.info("--- adding ScraperFileSystem to storage cortex");
 storage.FileSystems.use("http", ScraperFileSystem);
 
-async function tests() {
+
+async function test_1() {
 
   logger.info("=== list scraper directory (forEach)");
   await list({
@@ -29,6 +30,9 @@ async function tests() {
     },
     terminal: "./test/output/scraper_list_1.json"
   });
+}
+
+async function test_2() {
 
   logger.info("=== list scraper directory (recursive)");
   await list({
@@ -46,6 +50,10 @@ async function tests() {
     },
     terminal: "./test/output/scraper_list_2.json"
   });
+
+}
+
+async function test_3() {
 
   logger.info("=== list scraper directory (recursive)");
   await list({
@@ -66,4 +74,8 @@ async function tests() {
 
 }
 
-tests();
+(async () => {
+  await test_1();
+  await test_2();
+  await test_3();
+})();
