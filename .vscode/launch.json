@@ -12,8 +12,7 @@
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "debug"
-      },
-      "runtimeArgs": ["--inspect-brk"]
+      }
     },
     {
       "type": "node",
@@ -22,7 +21,7 @@
       "program": "${workspaceFolder}/test/scraper/download.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "verbose"
+        "LOG_LEVEL": "debug"
       }
     },
     {
@@ -32,9 +31,8 @@
       "program": "${workspaceFolder}/test/scraper/transfer.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "verbose"
-      },
-      "runtimeArgs": ["--inspect-brk"]
+        "LOG_LEVEL": "debug"
+      }
     }
   ]
 }

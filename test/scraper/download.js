@@ -22,20 +22,20 @@ async function test_1() {
       smt: "json|http://localhost/test/data/|*.json|*",
       options: {
         recursive: false,
-        saveFiles: true,
+        saveFiless: true,
         forEach: (name) => {
           logger.info("- " + name);
         }
       }
     },
-    terminal: "./test/output/downloads"
+    terminal: "./test/output/downloads/"
   });
 
   logger.info("=== scraper list directory page (forEach)");
   let list = await scraper.loadPage();
   
   for (let entry of list) {
-    console.log(JSON.stringify(entry,null,2));
+    logger.verbose(JSON.stringify(entry,null,2));
     await scraper.downloadFile(entry)
   }
 

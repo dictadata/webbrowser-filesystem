@@ -28,6 +28,7 @@ module.exports = exports = class Download {
    * HTML DOM selector.
    */
   async loadPage() {
+    logger.verbose("=== scraper.loadPage");
 
     logger.info(">>> create junction");
     logger.verbose("smt:" + this.tract.origin.smt);
@@ -61,7 +62,18 @@ module.exports = exports = class Download {
    * @param {*} filename 
    */
   async downloadFile(filename) {
-    await this.junction.getReadStream({schema: filename});
+    logger.verbose("=== scraper.downloadFile");
+    let fs = await this.junction.getFileSystem();
+
+    let options = {
+      schema: filename,
+      saveFiles: true,
+      saveFolder: this.tract.terminal | './'
+    }
+    let ok = await fs.download(options);
+
+    if (!ok)
+      logger.error("download failed: " + filename);
   }
 
   /**
@@ -70,6 +82,8 @@ module.exports = exports = class Download {
    * @param {*} tract 
    */
   async transfer(tract) {
+    logger.verbose("=== scraper.transfer");
+
     let filename = tract.origin.schema;
     let rs = await this.junction.getReadStream({schema: filename});
 

@@ -12,16 +12,16 @@ const util = require('util');
 
 const pipeline = util.promisify(stream.pipeline);
 
-console.log("=== Tests: ScraperJunction");
+logger.info("=== Tests: ScraperJunction");
 
-console.log("--- adding ScraperJunction to storage cortex");
+logger.info("--- adding ScraperJunction to storage cortex");
 storage.use("scraper", ScraperJunction);
 
 
 async function testStream() {
-  console.log("=== testStream");
+  logger.info("=== testStream");
 
-  console.log(">>> create junction");
+  logger.info(">>> create junction");
   var junction = storage.activate({
     smt: {
       model:"scraper",
@@ -33,16 +33,16 @@ async function testStream() {
     logger: logger
   });
 
-  console.log(">>> create streams");
+  logger.info(">>> create streams");
   var reader = junction.getReadStream({});
   var writer = junction.getWriteStream({});
 
-  //console.log(">>> start pipe");
+  //logger.info(">>> start pipe");
   //await pipeline(reader,writer);
 
   await junction.relax();
 
-  console.log(">>> completed");
+  logger.info(">>> completed");
 }
 
 async function tests() {
