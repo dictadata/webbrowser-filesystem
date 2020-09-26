@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/test/scraper/list.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "debug"
+        "LOG_LEVEL": "verbose"
       }
     },
     {
@@ -21,7 +21,7 @@
       "program": "${workspaceFolder}/test/scraper/download.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "debug"
+        "LOG_LEVEL": "verbose"
       }
     },
     {
@@ -31,7 +31,7 @@
       "program": "${workspaceFolder}/test/scraper/transfer.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "debug"
+        "LOG_LEVEL": "verbose"
       }
     }
   ]

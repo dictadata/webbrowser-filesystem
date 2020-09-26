@@ -13,16 +13,16 @@ module.exports = exports = async function (tract) {
   logger.verbose("smt:" + tract.origin.smt);
   if (tract.origin.options) logger.verbose("options:" + JSON.stringify(tract.origin.options));
 
-  var jo;
+  var junction;
   try {
-    jo = await storage.activate(tract.origin.smt, tract.origin.options);
+    junction = await storage.activate(tract.origin.smt, tract.origin.options);
     logger.info(">>> list");
-    let list = await jo.list();
+    let list = await junction.list();
 
     logger.debug("list: " + JSON.stringify(list, null, "  "));
     if (tract.terminal) {
       logger.info(">>> save encoding to " + tract.terminal);
-      fs.writeFileSync(tract.terminal, JSON.stringify(list,null,"  "), "utf8");
+      fs.writeFileSync(tract.terminal, JSON.stringify(list, null, "  "), "utf8");
     }
 
     logger.info(">>> completed");
@@ -31,7 +31,7 @@ module.exports = exports = async function (tract) {
     logger.error('!!! request failed: ' + err.message);
   }
   finally {
-    await jo.relax();
+    await junction.relax();
   }
 
 };

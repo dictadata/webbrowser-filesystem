@@ -51,6 +51,7 @@ async function test_1() {
     }
   });
 
+  await scraper.relax();
 }
 
 async function test_2() {
@@ -79,20 +80,23 @@ async function test_2() {
     }
   });
 
-  logger.verbose('=== scraper_output.json.gz');
-  await scraper.transfer({
-    origin: {
-      schema: "foofile.json"
-    },
-    terminal: {
-      smt: "json|./test/output/|scraper_output.json.gz|*"
-    }
-  });
-
+  // TO DO: chromium displays .json files inline
+  /*
+    logger.verbose('=== scraper_output.json.gz');
+    await scraper.transfer({
+      origin: {
+        schema: "foofile.json"
+      },
+      terminal: {
+        smt: "json|./test/output/|scraper_output.json.gz|*"
+      }
+    });
+  */
+  await scraper.relax();
 }
 
 
 (async () => {
   await test_1();
-  //await test_2();
+  await test_2();
 })();
