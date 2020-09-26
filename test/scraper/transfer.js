@@ -6,7 +6,7 @@
 const storage = require("@dictadata/storage-junctions");
 const ScraperFileSystem = require("../../lib/filesystems/scraper-filesystem")
 
-const scraper = require('../lib/_scraper');
+const Scraper = require('../lib/_scraper');
 const logger = require('../../lib/logger');
 
 logger.info("=== Test: scraper transfers");
@@ -20,27 +20,21 @@ async function test_1() {
 
   let scraper = new Scraper({
     origin: {
-      smt: "csv|http://localhost/test/data/|*.csv|*",
+      smt: "csv|http://localhost/test/data/|*|*",
       options: {
-        recursive: false,
-        forEach: (name) => {
-          logger.info("- " + name);
-        }
+        recursive: false
       },
       encoding: './test/data/foo_encoding.json'
-    },
-    terminal: ""
+    }
   });
 
   logger.info("=== scraper load HTML page");
   let list = await scraper.loadPage();
-  
+
   logger.verbose('=== scraper_output.csv');
   await scraper.transfer({
     origin: {
-      schema: "foofile.csv.gz",
-      options: {
-      }
+      schema: "foofile.csv.gz"
     },
     terminal: {
       smt: "csv|./test/output/|scraper_output.csv|*"
@@ -50,9 +44,7 @@ async function test_1() {
   logger.verbose('=== scraper_output.csv.gz');
   await scraper.transfer({
     origin: {
-      schema: "foofile.csv",
-      options: {
-      }
+      schema: "foofile.csv"
     },
     terminal: {
       smt: "csv|./test/output/|scraper_output.csv.gz|*"
@@ -61,7 +53,6 @@ async function test_1() {
 
 }
 
-
 async function test_2() {
   logger.verbose("=== test_2 - tranfer json files");
 
@@ -69,25 +60,19 @@ async function test_2() {
     origin: {
       smt: "json|http://localhost/test/data/|*.json|*",
       options: {
-        recursive: false,
-        forEach: (name) => {
-          logger.info("- " + name);
-        }
+        recursive: false
       },
       encoding: './test/data/foo_encoding.json'
-    },
-    terminal: ""
+    }
   });
 
   logger.info("=== scraper load HTML page");
   let list = await scraper.loadPage();
-  
+
   logger.verbose('=== scraper_output.json');
   await scraper.transfer({
     origin: {
-      schema: "foofile.json.gz",
-      options: {
-      }
+      schema: "foofile.json.gz"
     },
     terminal: {
       smt: "json|./test/output/|scraper_output.json|*"
@@ -97,9 +82,7 @@ async function test_2() {
   logger.verbose('=== scraper_output.json.gz');
   await scraper.transfer({
     origin: {
-      schema: "foofile.json",
-      options: {
-      }
+      schema: "foofile.json"
     },
     terminal: {
       smt: "json|./test/output/|scraper_output.json.gz|*"
@@ -111,5 +94,5 @@ async function test_2() {
 
 (async () => {
   await test_1();
-  await test_2();
+  //await test_2();
 })();

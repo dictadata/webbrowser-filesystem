@@ -19,10 +19,10 @@ async function test_1() {
 
   let scraper = new Scraper({
     origin: {
-      smt: "json|http://localhost/test/data/|*.json|*",
+      smt: "csv|http://localhost/test/data/|*.gz|*",
       options: {
         recursive: false,
-        saveFiless: true,
+        saveFiles: true,
         forEach: (name) => {
           logger.info("- " + name);
         }
@@ -33,9 +33,9 @@ async function test_1() {
 
   logger.info("=== scraper list directory page (forEach)");
   let list = await scraper.loadPage();
-  
+
   for (let entry of list) {
-    logger.verbose(JSON.stringify(entry,null,2));
+    logger.verbose(JSON.stringify(entry, null, 2));
     await scraper.downloadFile(entry)
   }
 

@@ -5,7 +5,11 @@
 
 const storage = require("@dictadata/storage-junctions");
 const logger = require('../../lib/logger');
+
 const fs = require('fs');
+const stream = require('stream');
+const util = require('util');
+const pipeline = util.promisify(stream.pipeline);
 
 module.exports = exports = class Download {
 
@@ -32,11 +36,13 @@ module.exports = exports = class Download {
 
     logger.info(">>> create junction");
     logger.verbose("smt:" + this.tract.origin.smt);
-    if (this.tract.origin.options) logger.verbose("options:" + JSON.stringify(this.tract.origin.options));
+    if (this.tract.origin.options)
+      logger.verbose("options:" + JSON.stringify(this.tract.origin.options));
 
     let list = [];
 
     try {
+      logger.info(">>> create junctions");
       this.junction = await storage.activate(this.tract.origin.smt, this.tract.origin.options);
 
       logger.info(">>> list");
@@ -68,7 +74,7 @@ module.exports = exports = class Download {
     let options = {
       schema: filename,
       saveFiles: true,
-      saveFolder: this.tract.terminal | './'
+      saveFolder: this.tract.terminal || './'
     }
     let ok = await fs.download(options);
 
@@ -79,57 +85,56 @@ module.exports = exports = class Download {
   /**
    * transfer uses the readStream to pipe the file contents.
    * 
-   * @param {*} tract 
+   * @param {*} options
    */
-  async transfer(tract) {
+  async transfer(options) {
     logger.verbose("=== scraper.transfer");
+    let origin = Object.assign({}, this.tract.origin, options.origin);
+    let terminal = Object.assign({}, this.tract.terminal, options.terminal);
+    let transforms = Object.assign({}, this.tract.transforms, options.transforms);
 
-    let filename = tract.origin.schema;
-    let rs = await this.junction.getReadStream({schema: filename});
+    let rs = this.junction.getReadStream({ schema: origin.schema });
 
     var jt;  // junction terminal
     try {
-      logger.info(">>> create junctions");
-      let transforms = tract.transforms || {};
-  
       logger.debug(">>> get origin encoding");
       // load encoding from origin for validation
-      let encoding = tract.origin.encoding;
+      let encoding = origin.encoding;
       if (typeof encoding === "string")
         encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
       if (typeof encoding === "object")
         encoding = await this.junction.putEncoding(encoding);
       else
         encoding = await this.junction.getEncoding();
-  
+
       logger.debug("create the terminal");
-      jt = await storage.activate(tract.terminal.smt, tract.terminal.options);
-  
-      if (tract.terminal.encoding) {
+      jt = await storage.activate(terminal.smt, terminal.options);
+
+      if (terminal.encoding) {
         // use configured encoding
-        encoding = tract.terminal.encoding;
+        encoding = terminal.encoding;
         if (typeof encoding === "string")
           encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
       }
       // else use origin encoding
       logger.debug(">>> encoding results");
       logger.debug(JSON.stringify(encoding.fields, null, " "));
-  
+
       logger.verbose(">>> put terminal encoding");
       encoding = await jt.putEncoding(encoding);
       if (typeof encoding !== "object")
         logger.info("could not create storage schema: " + encoding);
-  
+
       // transfer the data
       logger.info(">>> transfer pipeline");
       let pipes = [];
-      pipes.push(this.junction.getReadStream());
-      for (let [tfType,tfOptions] of Object.entries(transforms))
+      pipes.push(this.junction.getReadStream({ schema: origin.schema }));
+      for (let [tfType, tfOptions] of Object.entries(transforms))
         pipes.push(this.junction.getTransform(tfType, tfOptions));
       pipes.push(jt.getWriteStream());
-  
+
       await pipeline(pipes);
-  
+
       logger.info(">>> completed");
     }
     catch (err) {
@@ -138,7 +143,7 @@ module.exports = exports = class Download {
     finally {
       if (jt) await jt.relax();
     }
-  
+
   }
 
 }
