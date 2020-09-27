@@ -23,8 +23,8 @@ async function test_1() {
       smt: "json|http://localhost/test/data/|*.json|*",
       options: {
         recursive: false,
-        forEach: (name) => {
-          logger.info("- " + name);
+        forEach: (entry) => {
+          logger.info("- " + entry.name);
         }
       }
     },
