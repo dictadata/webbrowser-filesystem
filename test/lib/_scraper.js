@@ -67,19 +67,18 @@ module.exports = exports = class Download {
    * 
    * @param {*} filename 
    */
-  async downloadFile(filename) {
+  async downloadFile(entry) {
     logger.verbose("=== scraper.downloadFile");
     let fs = await this.junction.getFileSystem();
 
-    let options = {
-      schema: filename,
+    let options = Object.assign(entry, {
       saveFiles: true,
       saveFolder: this.tract.terminal || './'
-    }
+    });
     let ok = await fs.download(options);
 
     if (!ok)
-      logger.error("download failed: " + filename);
+      logger.error("download failed: " + href);
   }
 
   /**

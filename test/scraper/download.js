@@ -21,7 +21,7 @@ async function test_1() {
   logger.verbose("--- create scraper");
   let scraper = new Scraper({
     origin: {
-      smt: "csv|http://localhost/test/data/|*.gz|*",
+      smt: "csv|http://localhost/test/data/|*.xml|*",
       options: {
         recursive: false,
         saveFiles: true
@@ -36,7 +36,7 @@ async function test_1() {
   logger.info("=== scraper download files");
   for (let entry of list) {
     logger.verbose(JSON.stringify(entry, null, 2));
-    await scraper.downloadFile(entry)
+    await scraper.downloadFile(entry);
   }
 
   await scraper.relax();
@@ -63,7 +63,7 @@ async function test_2() {
   logger.info("=== scraper download files");
   for (let entry of list) {
     logger.verbose(JSON.stringify(entry, null, 2));
-    await scraper.downloadFile(entry)
+    await scraper.downloadFile(entry);
   }
 
   await scraper.relax();
@@ -72,5 +72,5 @@ async function test_2() {
 
 (async () => {
   await test_1();
-  //await test_2();
+  await test_2();
 })();
