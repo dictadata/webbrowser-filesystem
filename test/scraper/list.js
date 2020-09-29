@@ -59,7 +59,7 @@ async function test_3() {
   await list({
     origin: {
       smt: {
-        model: "json",
+        model: "shp",
         locus: "http://ec2-3-208-205-6.compute-1.amazonaws.com/shapefiles/",
         schema: "*.shp",
         key: "*"

@@ -21,7 +21,7 @@ async function test_1() {
   logger.verbose("--- create scraper");
   let scraper = new Scraper({
     origin: {
-      smt: "csv|http://localhost/test/data/|*.xml|*",
+      smt: "csv|http://localhost/test/data/|*.csv|*",
       options: {
         recursive: false,
         saveFiles: true
@@ -51,7 +51,8 @@ async function test_2() {
       smt: "shp|http://ec2-3-208-205-6.compute-1.amazonaws.com/shapefiles/|*.*|*",
       options: {
         recursive: true,
-        saveFiles: true
+        saveFiles: true,
+        savePaths: true
       }
     },
     terminal: "./test/output/shapefiles/"
