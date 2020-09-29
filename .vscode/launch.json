@@ -7,8 +7,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "scraper list",
-      "program": "${workspaceFolder}/test/scraper/list.js",
+      "name": "webbrowser list",
+      "program": "${workspaceFolder}/test/webbrowser/list.js",
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"
@@ -17,8 +17,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "scraper download",
-      "program": "${workspaceFolder}/test/scraper/download.js",
+      "name": "webbrowser download",
+      "program": "${workspaceFolder}/test/webbrowser/download.js",
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"
@@ -27,8 +27,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "scraper transfer",
-      "program": "${workspaceFolder}/test/scraper/transfer.js",
+      "name": "webbrowser transfer",
+      "program": "${workspaceFolder}/test/webbrowser/transfer.js",
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"

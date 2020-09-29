@@ -1,25 +1,26 @@
 {
-  "name": "@dictadata/scraper-filesystem",
+  "name": "@dictadata/webbrowser-filesystem",
   "version": "1.0.0",
-  "description": "Storage junction for Amazon scraper database access.",
+  "description": "Browser based file downloads from directory listing enabled web pages.",
   "main": "index.js",
   "scripts": {
-    "debug": "set NODE_ENV=development&& node --inspect-brk test/scraper/list.js",
+    "debug": "set NODE_ENV=development&& node --inspect-brk test/webbrowser/list.js",
     "test": "node test/main.js"
   },
-  "repository": "github:dictadata/scraper-filesystem",
+  "repository": "github:dictadata/webbrowser-filesystem",
   "keywords": [
     "storage",
     "junction",
-    "scraper",
-    "html"
+    "filesystem",
+    "browser",
+    "download"
   ],
   "author": "Drew O. Letcher",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dictadata/scraper-filesystem/issues"
+    "url": "https://github.com/dictadata/webbrowser-filesystem/issues"
   },
-  "homepage": "https://github.com/dictadata/scraper-filesystem#readme",
+  "homepage": "https://github.com/dictadata/webbrowser-filesystem#readme",
   "dependencies": {
     "@dictadata/storage-junctions": "^1.2.0",
     "node-html-parser": "^1.2.20"

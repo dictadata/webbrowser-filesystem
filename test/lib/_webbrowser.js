@@ -32,7 +32,7 @@ module.exports = exports = class Download {
    * HTML DOM selector.
    */
   async loadPage() {
-    logger.verbose("=== scraper.loadPage");
+    logger.verbose("=== webbrowser.loadPage");
 
     logger.info(">>> create junction");
     logger.verbose("smt:" + this.tract.origin.smt);
@@ -68,7 +68,7 @@ module.exports = exports = class Download {
    * @param {*} filename 
    */
   async downloadFile(entry) {
-    logger.verbose("=== scraper.downloadFile");
+    logger.verbose("=== webbrowser.downloadFile");
     let fs = await this.junction.getFileSystem();
 
     let options = Object.assign(entry, {
@@ -87,7 +87,7 @@ module.exports = exports = class Download {
    * @param {*} options
    */
   async transfer(options) {
-    logger.verbose("=== scraper.transfer");
+    logger.verbose("=== webbrowser.transfer");
     let origin = Object.assign({}, this.tract.origin, options.origin);
     let terminal = Object.assign({}, this.tract.terminal, options.terminal);
     let transforms = Object.assign({}, this.tract.transforms, options.transforms);

@@ -1,7 +1,7 @@
 /**
- * @dictadata/scraper-filesystem
+ * @dictadata/webbrowser-filesystem
  */
 "use strict";
 
-var ScraperFileSystem = require("./lib/filesystems/scraper-filesystem");
-module.exports = ScraperFileSystem;
+var WebBrowserFileSystem = require("./lib/filesystems/webbrowser-filesystem");
+module.exports = WebBrowserFileSystem;

@@ -1,10 +1,13 @@
 /**
- * test/scraper-filesystem
+ * test/webbrowser-filesystem
+ * 
+ * TO DO: rework this test to use a WebBrowserFileSystem
+ * 
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const ScraperJunction = require("../lib/scraper");
+const WebBrowserFileSystem = require("../lib/webbrowser");
 const logger = require('./logger');
 
 const stream = require('stream');
@@ -12,10 +15,10 @@ const util = require('util');
 
 const pipeline = util.promisify(stream.pipeline);
 
-logger.info("=== Tests: ScraperJunction");
+logger.info("=== Tests: WebBrowserFileSystem");
 
-logger.info("--- adding ScraperJunction to storage cortex");
-storage.use("scraper", ScraperJunction);
+logger.info("--- adding WebBrowserFileSystem to storage cortex");
+storage.FileSystems.use("http", WebBrowserFileSystem);
 
 
 async function testStream() {
@@ -24,7 +27,7 @@ async function testStream() {
   logger.info(">>> create junction");
   var junction = storage.activate({
     smt: {
-      model:"scraper",
+      model: "webbrowser",
       locus: "somewhere",
       schema: "container",
       key: "*"

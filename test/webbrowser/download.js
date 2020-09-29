@@ -1,25 +1,25 @@
 /**
- * test/scraper/download
+ * test/webbrowser/download
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const ScraperFileSystem = require("../../lib/filesystems/scraper-filesystem")
+const WebBrowserFileSystem = require("../../lib/filesystems/webbrowser-filesystem")
 
-const Scraper = require('../lib/_scraper');
+const WebBrowser = require('../lib/_webbrowser');
 const logger = require('../../lib/logger');
 
-logger.info("=== tests: scraper downloads");
+logger.info("=== tests: webbrowser downloads");
 
-logger.info("--- adding ScraperFileSystem to storage cortex");
-storage.FileSystems.use("http", ScraperFileSystem);
+logger.info("--- adding WebBrowserFileSystem to storage cortex");
+storage.FileSystems.use("http", WebBrowserFileSystem);
 
 
 async function test_1() {
   logger.info("=== download from HTML directory page");
 
-  logger.verbose("--- create scraper");
-  let scraper = new Scraper({
+  logger.verbose("--- create webbrowser");
+  let webbrowser = new WebBrowser({
     origin: {
       smt: "csv|http://localhost/test/data/|*.csv|*",
       options: {
@@ -30,23 +30,23 @@ async function test_1() {
     terminal: "./test/output/downloads/"
   });
 
-  logger.info("=== scraper load directory page");
-  let list = await scraper.loadPage();
+  logger.info("=== webbrowser load directory page");
+  let list = await webbrowser.loadPage();
 
-  logger.info("=== scraper download files");
+  logger.info("=== webbrowser download files");
   for (let entry of list) {
     logger.verbose(JSON.stringify(entry, null, 2));
-    await scraper.downloadFile(entry);
+    await webbrowser.downloadFile(entry);
   }
 
-  await scraper.relax();
+  await webbrowser.relax();
 }
 
 async function test_2() {
   logger.info("=== download shape files");
 
-  logger.verbose("--- create scraper");
-  let scraper = new Scraper({
+  logger.verbose("--- create webbrowser");
+  let webbrowser = new WebBrowser({
     origin: {
       smt: "shp|http://ec2-3-208-205-6.compute-1.amazonaws.com/shapefiles/|*.*|*",
       options: {
@@ -58,16 +58,16 @@ async function test_2() {
     terminal: "./test/output/shapefiles/"
   });
 
-  logger.info("=== scraper load directory page");
-  let list = await scraper.loadPage();
+  logger.info("=== webbrowser load directory page");
+  let list = await webbrowser.loadPage();
 
-  logger.info("=== scraper download files");
+  logger.info("=== webbrowser download files");
   for (let entry of list) {
     logger.verbose(JSON.stringify(entry, null, 2));
-    await scraper.downloadFile(entry);
+    await webbrowser.downloadFile(entry);
   }
 
-  await scraper.relax();
+  await webbrowser.relax();
 }
 
 
