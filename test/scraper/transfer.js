@@ -34,7 +34,7 @@ async function test_1() {
   logger.verbose('=== scraper_output.csv');
   await scraper.transfer({
     origin: {
-      schema: "foofile.csv.gz"
+      link: "/test/data/foofile.csv.gz"
     },
     terminal: {
       smt: "csv|./test/output/|scraper_output.csv|*"
@@ -44,7 +44,7 @@ async function test_1() {
   logger.verbose('=== scraper_output.csv.gz');
   await scraper.transfer({
     origin: {
-      schema: "foofile.csv"
+      link: "/test/data/foofile.csv"
     },
     terminal: {
       smt: "csv|./test/output/|scraper_output.csv.gz|*"
@@ -73,25 +73,23 @@ async function test_2() {
   logger.verbose('=== scraper_output.json');
   await scraper.transfer({
     origin: {
-      schema: "foofile.json.gz"
+      link: "/test/data/foofile.json.gz"
     },
     terminal: {
       smt: "json|./test/output/|scraper_output.json|*"
     }
   });
 
-  // TO DO: chromium displays .json files inline
-  /*
-    logger.verbose('=== scraper_output.json.gz');
-    await scraper.transfer({
-      origin: {
-        schema: "foofile.json"
-      },
-      terminal: {
-        smt: "json|./test/output/|scraper_output.json.gz|*"
-      }
-    });
-  */
+  logger.verbose('=== scraper_output.json.gz');
+  await scraper.transfer({
+    origin: {
+      link: "/test/data/foofile.json"
+    },
+    terminal: {
+      smt: "json|./test/output/|scraper_output.json.gz|*"
+    }
+  });
+
   await scraper.relax();
 }
 

@@ -78,7 +78,7 @@ module.exports = exports = class Download {
     let ok = await fs.download(options);
 
     if (!ok)
-      logger.error("download failed: " + href);
+      logger.error("download failed: " + entry.href);
   }
 
   /**
@@ -92,7 +92,7 @@ module.exports = exports = class Download {
     let terminal = Object.assign({}, this.tract.terminal, options.terminal);
     let transforms = Object.assign({}, this.tract.transforms, options.transforms);
 
-    let rs = this.junction.getReadStream({ schema: origin.schema });
+    let rs = this.junction.getReadStream({ link: origin.link });
 
     var jt;  // junction terminal
     try {
@@ -127,7 +127,7 @@ module.exports = exports = class Download {
       // transfer the data
       logger.info(">>> transfer pipeline");
       let pipes = [];
-      pipes.push(this.junction.getReadStream({ schema: origin.schema }));
+      pipes.push(this.junction.getReadStream({ link: origin.link }));
       for (let [tfType, tfOptions] of Object.entries(transforms))
         pipes.push(this.junction.getTransform(tfType, tfOptions));
       pipes.push(jt.getWriteStream());
