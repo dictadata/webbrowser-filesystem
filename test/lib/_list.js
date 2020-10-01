@@ -10,7 +10,7 @@ const fs = require('fs');
 module.exports = exports = async function (tract) {
 
   logger.info(">>> create junction");
-  logger.verbose("smt:" + tract.origin.smt);
+  logger.verbose("smt:" + JSON.stringify(tract.origin.smt, null, 2));
   if (tract.origin.options) logger.verbose("options:" + JSON.stringify(tract.origin.options));
 
   var junction;
@@ -34,4 +34,4 @@ module.exports = exports = async function (tract) {
     await junction.relax();
   }
 
-};
+}

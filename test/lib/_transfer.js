@@ -1,5 +1,5 @@
 /**
- * test/lib/download
+ * test/lib/transfer
  */
 "use strict";
 
@@ -11,12 +11,9 @@ const stream = require('stream');
 const util = require('util');
 const pipeline = util.promisify(stream.pipeline);
 
-module.exports = exports = class Download {
-
-  constructor(tract) {
-    this.tract = tract;
-    this.junction = null;
-  }
+module.exports = exports = async function (tract) {
+  this.tract = tract;
+  this.junction = null;
 
   async relax() {
     await this.junction.relax();
@@ -35,7 +32,7 @@ module.exports = exports = class Download {
     logger.verbose("=== webbrowser.loadPage");
 
     logger.info(">>> create junction");
-    logger.verbose("smt:" + this.tract.origin.smt);
+    logger.verbose("smt:" + JSON.stringify(tract.origin.smt, null, 2));
     if (this.tract.origin.options)
       logger.verbose("options:" + JSON.stringify(this.tract.origin.options));
 
