@@ -6,7 +6,7 @@
 const storage = require("@dictadata/storage-junctions");
 const WebBrowserFileSystem = require("../../lib/filesystems/webbrowser-filesystem")
 
-const WebBrowser = require('../lib/_webbrowser');
+const transfer = require('../lib/_transfer');
 const logger = require('../../lib/logger');
 
 logger.info("=== Test: webbrowser transfers");
@@ -18,79 +18,63 @@ storage.FileSystems.use("http", WebBrowserFileSystem);
 async function test_1() {
   logger.verbose("=== test_1 - tranfer csv files");
 
-  let webbrowser = new WebBrowser({
+  await transfer({
     origin: {
-      smt: "csv|http://localhost/test/data/|*|*",
+      smt: "csv|http://localhost/test/data/|foofile.csv.gz|*",
       options: {
         recursive: false
       },
       encoding: './test/data/foo_encoding.json'
-    }
-  });
-
-  logger.info("=== webbrowser load HTML page");
-  let list = await webbrowser.loadPage();
-
-  logger.verbose('=== webbrowser_output.csv');
-  await webbrowser.transfer({
-    origin: {
-      link: "/test/data/foofile.csv.gz"
     },
     terminal: {
       smt: "csv|./test/output/|webbrowser_output.csv|*"
     }
   });
 
-  logger.verbose('=== webbrowser_output.csv.gz');
-  await webbrowser.transfer({
+  await transfer({
     origin: {
-      link: "/test/data/foofile.csv"
+      smt: "csv|http://localhost/test/data/|foofile.csv|*",
+      options: {
+        recursive: false
+      },
+      encoding: './test/data/foo_encoding.json'
     },
     terminal: {
       smt: "csv|./test/output/|webbrowser_output.csv.gz|*"
     }
   });
 
-  await webbrowser.relax();
 }
 
 async function test_2() {
   logger.verbose("=== test_2 - tranfer json files");
 
-  let webbrowser = new WebBrowser({
+  await transfer({
     origin: {
-      smt: "json|http://localhost/test/data/|*.json|*",
+      smt: "json|http://localhost/test/data/|foofile.json.gz|*",
       options: {
         recursive: false
       },
       encoding: './test/data/foo_encoding.json'
-    }
-  });
-
-  logger.info("=== webbrowser load HTML page");
-  let list = await webbrowser.loadPage();
-
-  logger.verbose('=== webbrowser_output.json');
-  await webbrowser.transfer({
-    origin: {
-      link: "/test/data/foofile.json.gz"
     },
     terminal: {
       smt: "json|./test/output/|webbrowser_output.json|*"
     }
   });
 
-  logger.verbose('=== webbrowser_output.json.gz');
-  await webbrowser.transfer({
+  await transfer({
     origin: {
-      link: "/test/data/foofile.json"
+      smt: "json|http://localhost/test/data/|foofile.json|*",
+      options: {
+        recursive: false
+      },
+      encoding: './test/data/foo_encoding.json'
     },
     terminal: {
       smt: "json|./test/output/|webbrowser_output.json.gz|*"
     }
   });
 
-  await webbrowser.relax();
 }
 
 
