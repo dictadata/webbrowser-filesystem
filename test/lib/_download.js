@@ -31,10 +31,7 @@ module.exports = exports = async function (tract) {
     for (let entry of list) {
       logger.verbose(JSON.stringify(entry, null, 2));
 
-      let options = Object.assign(entry, {
-        saveFiles: true,
-        saveFolder: tract.terminal || './'
-      });
+      let options = Object.assign(tract.terminal.options, entry);
       let ok = await stfs.download(options);
       if (!ok)
         logger.error("download failed: " + entry.href);

@@ -23,11 +23,14 @@ async function test_1() {
     origin: {
       smt: "csv|http://localhost/test/data/|*.csv|*",
       options: {
-        recursive: false,
-        saveFiles: true
+        recursive: false
       }
     },
-    terminal: "./test/output/downloads/"
+    terminal: {
+      options: {
+        folder: "./test/output/downloads/"
+      }
+    }
   });
 }
 
@@ -39,12 +42,15 @@ async function test_2() {
     origin: {
       smt: "shp|http://ec2-3-208-205-6.compute-1.amazonaws.com/shapefiles/|*.*|*",
       options: {
-        recursive: true,
-        saveFiles: true,
-        savePaths: true
+        recursive: true
       }
     },
-    terminal: "./test/output/shapefiles/"
+    terminal: {
+      options: {
+        folder: "./test/output/shapefiles/",
+        useRPath: true
+      }
+    }
   });
 }
 
