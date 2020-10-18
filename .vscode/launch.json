@@ -17,8 +17,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "webbrowser download",
-      "program": "${workspaceFolder}/test/webbrowser/download.js",
+      "name": "webbrowser transfer",
+      "program": "${workspaceFolder}/test/webbrowser/transfer.js",
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"
@@ -27,8 +27,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "webbrowser transfer",
-      "program": "${workspaceFolder}/test/webbrowser/transfer.js",
+      "name": "webbrowser download",
+      "program": "${workspaceFolder}/test/webbrowser/download.js",
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "verbose"
