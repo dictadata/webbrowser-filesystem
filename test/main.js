@@ -10,10 +10,8 @@ const storage = require("@dictadata/storage-junctions");
 const WebBrowserFileSystem = require("../lib/webbrowser");
 const logger = require('./logger');
 
-const stream = require('stream');
-const util = require('util');
+const stream = require('stream/promises');
 
-const pipeline = util.promisify(stream.pipeline);
 
 logger.info("=== Tests: WebBrowserFileSystem");
 
@@ -41,7 +39,7 @@ async function testStream() {
   var writer = junction.getWriteStream({});
 
   //logger.info(">>> start pipe");
-  //await pipeline(reader,writer);
+  //await stream.pipeline(reader,writer);
 
   await junction.relax();
 

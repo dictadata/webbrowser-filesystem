@@ -6,10 +6,9 @@
 const storage = require("@dictadata/storage-junctions");
 const logger = require('../../lib/logger');
 
-const fs = require('fs');
-const stream = require('stream');
-const util = require('util');
-const pipeline = util.promisify(stream.pipeline);
+const fs = require('fs/promises');
+const stream = require('stream/promises');
+
 
 module.exports = exports = async function (tract) {
   logger.verbose("=== transfer");
@@ -35,7 +34,7 @@ module.exports = exports = async function (tract) {
     // load encoding from origin for validation
     let encoding = origin.encoding;
     if (typeof encoding === "string")
-      encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
+      encoding = JSON.parse(await fs.readFile(encoding, "utf8"));
     if (typeof encoding === "object")
       encoding = await junction.putEncoding(encoding);
     else
@@ -48,7 +47,7 @@ module.exports = exports = async function (tract) {
       // use configured encoding
       encoding = terminal.encoding;
       if (typeof encoding === "string")
-        encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
+        encoding = JSON.parse(await fs.readFile(encoding, "utf8"));
     }
     // else use origin encoding
     logger.debug(">>> encoding results");
@@ -67,7 +66,7 @@ module.exports = exports = async function (tract) {
       pipes.push(junction.getTransform(tfType, tfOptions));
     pipes.push(jt.getWriteStream());
 
-    await pipeline(pipes);
+    await stream.pipeline(pipes);
 
     logger.info(">>> completed");
   }

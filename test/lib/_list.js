@@ -5,7 +5,7 @@
 
 const storage = require("@dictadata/storage-junctions");
 const logger = require('../../lib/logger');
-const fs = require('fs');
+const fs = require('fs/promises');
 
 module.exports = exports = async function (tract) {
 
@@ -22,7 +22,7 @@ module.exports = exports = async function (tract) {
     logger.debug("list: " + JSON.stringify(list, null, "  "));
     if (tract.terminal) {
       logger.info(">>> save encoding to " + tract.terminal);
-      fs.writeFileSync(tract.terminal, JSON.stringify(list, null, "  "), "utf8");
+      await fs.writeFile(tract.terminal, JSON.stringify(list, null, "  "), "utf8");
     }
 
     logger.info(">>> completed");
