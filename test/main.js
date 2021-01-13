@@ -35,8 +35,8 @@ async function testStream() {
   });
 
   logger.info(">>> create streams");
-  var reader = junction.getReadStream({});
-  var writer = junction.getWriteStream({});
+  var reader = junction.createReadStream({});
+  var writer = junction.createWriteStream({});
 
   //logger.info(">>> start pipe");
   //await stream.pipeline(reader,writer);

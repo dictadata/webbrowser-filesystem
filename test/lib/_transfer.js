@@ -61,10 +61,10 @@ module.exports = exports = async function (tract) {
     // transfer the data
     logger.info(">>> transfer pipeline");
     let pipes = [];
-    pipes.push(junction.getReadStream({ link: list[0].href }));
+    pipes.push(junction.createReadStream({ link: list[0].href }));
     for (let [tfType, tfOptions] of Object.entries(transforms))
-      pipes.push(junction.getTransform(tfType, tfOptions));
-    pipes.push(jt.getWriteStream());
+      pipes.push(junction.createTransform(tfType, tfOptions));
+    pipes.push(jt.createWriteStream());
 
     await stream.pipeline(pipes);
 
