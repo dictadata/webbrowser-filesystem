@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "name": "webbrowser list",
       "program": "${workspaceFolder}/test/webbrowser/list.js",
@@ -15,7 +15,7 @@
       }
     },
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "name": "webbrowser transfer",
       "program": "${workspaceFolder}/test/webbrowser/transfer.js",
@@ -25,7 +25,7 @@
       }
     },
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "name": "webbrowser download",
       "program": "${workspaceFolder}/test/webbrowser/download.js",
